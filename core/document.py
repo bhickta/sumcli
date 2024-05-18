@@ -2,11 +2,10 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.tag import pos_tag
 from nltk.corpus import stopwords
 from .static_types import WordTags
-import os
+import pyperclip
 
 class Document:
-    def __init__(self, path: os.PathLike) -> None:
-        self.path = path
+    def __init__(self) -> None:
         self.set_allowed_word_tags()
         self.set_fillers()
         self.post_init()
@@ -27,8 +26,7 @@ class Document:
         self.process_text()
 
     def set_text(self):
-        with open(self.path, "r") as file:
-            self.input_text = file.read()
+        self.input_text = pyperclip.paste()
 
     def process_text(self):
         self.process_newline()
